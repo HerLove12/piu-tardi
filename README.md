@@ -8,7 +8,7 @@ Progetto sito web completo per la vendita di beni da parte di utenti registrati 
 ### 1. Progettazione
 
 In questa fase e' avvenuta la progettazione del diagramma ER:
-![[ER-diagram.png]]
+![[https://github.com/HerLove12/piu-tardi/edit/master/ER-diagram.png]]
 
 Il gruppo ha ritenuto necessario specificare la `tipologia` dell'`annuncio` in una tabella separata per seguire le regole di normalizzazione. Stessa cosa per la questione delle `foto` che potranno essere piu' di una per ogni articolo.
 
