@@ -1,0 +1,54 @@
+CREATE DATABASE tardi;
+USE tardi;
+
+CREATE TABLE utente(
+	ID int(11) auto_increment ,
+    nome varchar(30) NOT NULL,
+    cognome varchar(30) NOT NULL,
+    eta int(11),
+    classe varchar(30),
+    email varchar(30) NOT NULL,
+	foto varchar(50),
+    PRIMARY KEY(ID)
+);
+
+CREATE TABLE annuncio(
+	ID int(11) auto_increment,
+    nome varchar(30) NOT NULL,
+    descrizioni varchar(50),
+    foto varchar(50),
+    categoria varchar(30) NOT NULL,
+    datacaricamento date NOT NULL,
+    ID_utente int(11) NOT NULL,
+    ID_categoria int(11) NOT NULL,
+    PRIMARY KEY(ID),
+    FOREIGN KEY(ID_utente) REFERENCES utente(ID) ON UPDATE CASCADE ON DELETE CASCADE
+    FOREIGN KEY(ID_tipologia) REFERENCES categoria(ID) ON UPDATE CASCADE ON DELETE CASCADE
+);
+
+CREATE TABLE tipologia(
+	ID int(11) auto_increment,
+    	nome varchar(30),
+	PRIMARY KEY(ID)
+);
+
+CREATE TABLE foto(
+	ID int(11) auto_increment,
+    	URL varchar(30),
+	ID_annuncio int(11),
+	PRIMARY KEY(ID),
+	FOREIGN KEY(ID_annuncio) REFERENCES annuncio(ID) ON UPDATE CASCADE ON DELETE CASCADE
+
+);
+
+CREATE TABLE propota(
+	ID int(11) NOT NULL auto_increment,
+    prezzo int(11) NOT NULL,
+    ID_utente int(11) NOT NULL,
+    dataproposta date,
+    ID_annuncio int(11) NOT NULL,
+    stato varchar(11),
+    PRIMARY KEY(ID),
+    FOREIGN KEY (ID_utente) REFERENCES utente(ID) ON UPDATE CASCADE ON DELETE CASCADE,
+    FOREIGN KEY (ID_annuncio) REFERENCES annuncio(ID) ON UPDATE CASCADE ON DELETE CASCADE
+);
