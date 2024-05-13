@@ -1,20 +1,6 @@
 <?php 
 session_start();
 include("../sito/connessione.php");
-?>
-MIZZIGA
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Sito</title>
-</head>
-
-<body>
-  <?php
-
   
   $us = $_POST["username"];
   $pass = $_POST["password"];
@@ -43,7 +29,4 @@ MIZZIGA
   }
   
 
-  ?>
-</body>
-
-</html>
+?>
