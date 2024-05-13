@@ -23,7 +23,6 @@ CREATE TABLE annuncio(
     nome varchar(30) NOT NULL,
     descrizioni varchar(50),
     foto varchar(50),
-    categoria varchar(30) NOT NULL,
     datacaricamento date NOT NULL,
     ID_utente int(11) NOT NULL,
     ID_tipologia int(11) NOT NULL,
@@ -32,16 +31,6 @@ CREATE TABLE annuncio(
     FOREIGN KEY(ID_tipologia) REFERENCES tipologia(ID) ON UPDATE CASCADE ON DELETE CASCADE
 );
 
-
-
-CREATE TABLE foto(
-	ID int(11) auto_increment,
-    	URL varchar(30),
-	ID_annuncio int(11),
-	PRIMARY KEY(ID),
-	FOREIGN KEY(ID_annuncio) REFERENCES annuncio(ID) ON UPDATE CASCADE ON DELETE CASCADE
-
-);
 
 CREATE TABLE propota(
 	ID int(11) NOT NULL auto_increment,
