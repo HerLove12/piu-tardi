@@ -5,7 +5,7 @@ mysqli_report(MYSQLI_REPORT_OFF);
 $servernameDB = "localhost";
 $usernameDB = "root";
 $passwordDB = "";
-$databaseDB = "cinema_finale_spagni";
+$databaseDB = "tardi";
 
 // Create connection
 try {

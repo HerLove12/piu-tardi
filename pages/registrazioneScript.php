@@ -1,6 +1,6 @@
 <?php 
 session_start();
-include("../sito/connessione.php");
+include("./connessione.php");
 ?>
 
 <!DOCTYPE html>
@@ -15,31 +15,32 @@ include("../sito/connessione.php");
 <body>
   <?php
 
-  $us = $_POST["username"];
-  $pass = $_POST["password"];
+  $et = $_POST["eta"];
+  $pass = hash("sha256", $_POST["password"]);
   $n = $_POST["nome"];
   $c = $_POST["cognome"];
   $e = $_POST["email"];
-  $sql = "SELECT * FROM utente WHERE Username = '$us'";
+  $cl = $_POST["classe"];
+  $sql = "SELECT * FROM utente WHERE email = '$e'";
 
   $result = $conn->query($sql);
   if (is_bool($result)) {
     $_SESSION["errore"] = "ERRORE - RISULTATO BOOLEANO";
-    header("Location: ./paginaregistrazione.php");
+    header("Location: ./registrazione.php");
   } else {
     if ($result->num_rows == 0) {
-      $sql = "INSERT INTO utente( Username, Passwd, Nome, Cognome, Email) VALUES ( '$us', '$pass', '$n', '$c', '$e')";
+      $sql = "INSERT INTO utente(email, password, nome, cognome, eta, classe) VALUES ( '$e', '$pass', '$n', '$c', '$et', '$cl')";
       $conn->query($sql);
       if ($conn->affected_rows > 0) {
         $_SESSION["utente"] = $us;
         header("Location: ./benvenuto.php");
       } else {
         $_SESSION["errore"] = "ERRORE - QUERY SQL";
-        header("Location: ./paginaregistrazione.php");
+        header("Location: ./registrazione.php");
       }
     } else {
-      $_SESSION["errore"] = "UTENTE GIÀ ESISTENTE";
-      header("Location: ./paginaregistrazione.php");
+      $_SESSION["errore"] = "EMAIL GIÀ ESISTENTE";
+      header("Location: ./registrazione.php");
     }
   }
 

@@ -2,6 +2,7 @@ USE tardi;
 
 CREATE TABLE utente(
 	ID int(11) auto_increment ,
+    password varchar(256) NOT NULL,
     nome varchar(30) NOT NULL,
     cognome varchar(30) NOT NULL,
     eta int(11),
