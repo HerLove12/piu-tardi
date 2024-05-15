@@ -14,7 +14,7 @@ include("./connessione.php");
 
 <body>
     <div> 
-        <!-- menu a tendina categorie, finire il refresh della pagina -->
+        <!-- menu a tendina categorie, finire il refresh della paginaa -->
         <?php
                 $sql = "SELECT nome, ID FROM tipologia";
                 $result = $conn->query($sql);
