@@ -17,7 +17,7 @@ include("./connessione.php");
       $result = $conn->query($sql);
       if ($result->num_rows > 0) {
         $_SESSION["utente"] = $e;
-        header("Location: ./benvenuto.php");
+        header("Location: ./index.php");
       } else {
         $_SESSION["errore"] = "PASSWORD ERRATA";
         header("Location: ./login.php");

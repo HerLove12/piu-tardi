@@ -24,7 +24,7 @@ session_start();
   <p><a href="./registrazione.php">REGISTRATI</a></p>
 
   <?php
-  if (isset($_SESSION["errore"]) || !empty($_SESSION["errore"])){
+  if (isset($_SESSION["errore"]) or !empty($_SESSION["errore"])){
     echo "<p>{$_SESSION["errore"]}</p>";  
     unset($_SESSION["errore"]);
   }

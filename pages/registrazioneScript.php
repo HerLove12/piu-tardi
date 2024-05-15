@@ -33,7 +33,7 @@ include("./connessione.php");
       $conn->query($sql);
       if ($conn->affected_rows > 0) {
         $_SESSION["utente"] = $us;
-        header("Location: ./benvenuto.php");
+        header("Location: ./index.php");
       } else {
         $_SESSION["errore"] = "ERRORE - QUERY SQL";
         header("Location: ./registrazione.php");

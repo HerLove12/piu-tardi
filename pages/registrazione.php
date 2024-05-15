@@ -16,9 +16,6 @@ session_start();
     <input type="email" name="email" required>
     <label for="EMAIL">EMAIL</label>
     <br><br>
-    <input type="password" name="password" required>
-    <label for="PASSWORD">PASSWORD</label>
-    <br><br>
     <input type="text" name="nome" required>
     <label for="NOME">NOME</label>
     <br><br>
@@ -31,6 +28,37 @@ session_start();
     <input type="text" name="classe" required>
     <label for="COGNOME">CLASSE</label>
     <br><br>
+    <input type="password" name="password" required>
+    <label for="PASSWORD">PASSWORD</label>
+    <br><br>
+    <input type="password" name="passwordConferma" required>
+    <label for="passwordConferma">CONFERMA PASSWORD</label>
+    <br><br>
+    <script>
+      const passwordInput = document.querySelector('input[name="password"]');
+      const passwordConfirmInput = document.querySelector('input[name="passwordConferma"]');
+      const errorText = document.createElement('p');
+      errorText.style.color = 'red';
+
+      passwordInput.addEventListener('input', () => {
+        checkPasswords();
+      });
+
+      passwordConfirmInput.addEventListener('input', () => {
+        checkPasswords();
+      });
+
+      function checkPasswords() {
+        if (passwordInput.value !== passwordConfirmInput.value && passwordConfirmInput.value != "") {
+          passwordConfirmInput.style.border = '1px solid red';
+          errorText.textContent = 'Le due password non coincidono';
+          passwordConfirmInput.parentNode.appendChild(errorText);
+        } else {
+          passwordConfirmInput.style.border = '1px solid black';
+          passwordConfirmInput.parentNode.removeChild(errorText);
+        }
+      }
+    </script>
 
     <input type="submit" value="SUBMIT">
   </form>

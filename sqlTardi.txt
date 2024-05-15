@@ -32,7 +32,7 @@ CREATE TABLE annuncio(
 );
 
 
-CREATE TABLE propota(
+CREATE TABLE proposta(
 	ID int(11) NOT NULL auto_increment,
     prezzo int(11) NOT NULL,
     ID_utente int(11) NOT NULL,
