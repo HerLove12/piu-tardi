@@ -35,16 +35,17 @@ include("./connessione.php");
             ?>
         <div><!-- dashboard articoli -->
             <?php
+                $ut = $_GET["id"];
                 $sql = "SELECT annuncio.ID, annuncio.nome, annuncio.foto, tipologia.nome AS tip, utente.ID AS utID, utente.email AS email FROM annuncio
                         JOIN tipologia ON tipologia.ID = annuncio.ID_tipologia
                         JOIN utente ON utente.ID = annuncio.ID_utente";
 
                 $filtro;
-                if(isset($_GET["filtro"]) and $_GET["filtro"]!=0){
+                if(isset($_GET["filtro"]) and $_GET["filtro"] != 0){
                     $filtro=$_GET["filtro"];
-                    $sql=$sql." WHERE tipologia.ID=$filtro";
-                }
-                
+                    $sql = $sql." WHERE tipologia.ID = $filtro AND utente.ID = $ut";
+                } else 
+                    $sql = $sql." WHERE utente.ID = $ut";
                 
                 $result = $conn->query($sql);
                 if($result){
@@ -60,8 +61,7 @@ include("./connessione.php");
                                 <a href=\"./articolo.php?id=$ID\"><img src=\"$foto\" onerror=\"this.src='../images/default.png'\" width=\"200px\" height=\"200px\" \"></a>
                                 <h3>$nome</h3>
                                 <p>$tipologia</p>
-                                <p>Caricata da:<br><a href=\"./utente.php?id=$utID\">$e<a></p> 
-                            </div>";//LINK DIRETTO ALL'UTENTE
+                            </div>";
                         }
                     }
                 } else{
