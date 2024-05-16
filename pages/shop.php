@@ -16,10 +16,10 @@ if (!isset($_SESSION["utente"]))
 </head>
 
 <body>
-    <div>
         <?php
             echo "<a href=\"./utente.php?id=". $_SESSION["utente"] ."\"><img class=\"foto_profilo\" src=\"...\" onerror=\"this.src='../images/default.png'\"></a>";// da definire la gestione delle foto
         ?>
+    <div>
         <!-- menu a tendina categorie -->
         <form action="shop.php" method="GET">
             <select name="filtro">";
