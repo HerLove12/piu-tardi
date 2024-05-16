@@ -9,7 +9,7 @@ $sql = "SELECT * FROM utente WHERE email = '$e'";
 $result = $conn->query($sql);
 if (is_bool($result)) {
   $_SESSION["errore"] = "ERRORE - RISULTATO BOOLEANO";
-  header("Location: ./login.php");
+  header("Location: ../index.php");
 } else {
   if ($result->num_rows > 0) {
     $sql = "SELECT * FROM utente WHERE email = '$e' AND password = '$pass'";
@@ -21,10 +21,10 @@ if (is_bool($result)) {
       header("Location: ./shop.php");
     } else {
       $_SESSION["errore"] = "PASSWORD ERRATA";
-      header("Location: ./login.php");
+      header("Location: ../index.php");
     }
   } else {
     $_SESSION["errore"] = "UTENTE NON ESISTENTE";
-    header("Location: ./login.php");
+    header("Location: ../index.php");
   }
 }
