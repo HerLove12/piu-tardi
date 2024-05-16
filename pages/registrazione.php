@@ -28,41 +28,17 @@ session_start();
     <input type="text" name="classe" required>
     <label for="COGNOME">CLASSE</label>
     <br><br>
-    <input type="password" name="password" required>
+    <input type="password" name="password" id="password" required>
     <label for="PASSWORD">PASSWORD</label>
+    <button type="button" id="togglePassword">TOGGLE VISIBILITY</button>
     <br><br>
     <input type="password" name="passwordConferma" required>
     <label for="passwordConferma">CONFERMA PASSWORD</label>
     <br><br>
-    <script>
-      const passwordInput = document.querySelector('input[name="password"]');
-      const passwordConfirmInput = document.querySelector('input[name="passwordConferma"]');
-      const errorText = document.createElement('p');
-      errorText.style.color = 'red';
-
-      passwordInput.addEventListener('input', () => {
-        checkPasswords();
-      });
-
-      passwordConfirmInput.addEventListener('input', () => {
-        checkPasswords();
-      });
-
-      function checkPasswords() {
-        if (passwordInput.value !== passwordConfirmInput.value && passwordConfirmInput.value != "") {
-          passwordConfirmInput.style.border = '1px solid red';
-          errorText.textContent = 'Le due password non coincidono';
-          passwordConfirmInput.parentNode.appendChild(errorText);
-        } else {
-          passwordConfirmInput.style.border = '1px solid black';
-          passwordConfirmInput.parentNode.removeChild(errorText);
-        }
-      }
-    </script>
 
     <input type="submit" value="SUBMIT">
   </form>
-  <p><a href="./login.php">LOGIN</a></p>
+  <p><a href="../index.php">LOGIN</a></p>
   <?php
   if (isset($_SESSION["errore"]) || !empty($_SESSION["errore"])) {
     echo "<p>{$_SESSION["errore"]}</p>";
@@ -70,5 +46,43 @@ session_start();
   }
   ?>
 </body>
+<script>
+  const passwordInput = document.getElementById('password');
+  const toggleButton = document.getElementById('togglePassword');
+
+  toggleButton.addEventListener('click', () => {
+    if (passwordInput.type === 'password') {
+      passwordInput.type = 'text';
+      toggleButton.textContent = 'HIDE PASSWORD';
+    } else {
+      passwordInput.type = 'password';
+      toggleButton.textContent = 'TOGGLE VISIBILITY';
+    }
+  });
+
+  const passwordInput2 = document.querySelector('input[name="password"]');
+  const passwordConfirmInput = document.querySelector('input[name="passwordConferma"]');
+  const errorText = document.createElement('p');
+  errorText.style.color = 'red';
+
+  passwordInput2.addEventListener('input', () => {
+    checkPasswords();
+  });
+
+  passwordConfirmInput.addEventListener('input', () => {
+    checkPasswords();
+  });
+
+  function checkPasswords() {
+    if (passwordInput2.value !== passwordConfirmInput.value && passwordConfirmInput.value != "") {
+      passwordConfirmInput.style.border = '1px solid red';
+      errorText.textContent = 'Le due password non coincidono';
+      passwordConfirmInput.parentNode.appendChild(errorText);
+    } else {
+      passwordConfirmInput.style.border = '1px solid black';
+      passwordConfirmInput.parentNode.removeChild(errorText);
+    }
+  }
+</script>
 
 </html>

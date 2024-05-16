@@ -1,6 +1,8 @@
 <?php
 session_start();
 include("./connessione.php");
+if(!isset($_SESSION["utente"]))
+    header("Location: ../index.php");
 ?>
 
 <!DOCTYPE html>
