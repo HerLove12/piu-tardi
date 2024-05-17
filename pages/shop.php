@@ -22,8 +22,9 @@ if (!isset($_SESSION["utente"]))
     <div>
         <!-- menu a tendina categorie -->
         <form action="shop.php" method="GET">
-            <select name="filtro">";
-                <option value="0">-nessun filtro-</option>
+            <select name="filtro" onchange="this.form.submit()">;
+                <option value="0" hidden></option>
+                <option value="0">Nessun Filtro</option>
                 <?php
                 $sql = "SELECT nome, ID FROM tipologia";
                 $result = $conn->query($sql);
@@ -37,7 +38,7 @@ if (!isset($_SESSION["utente"]))
                     echo "</select>";
                 }
                 ?>
-                <input type="submit">
+                <label for="filtro">Filtro</label>
         </form>
         <div><!-- dashboard articoli -->
             <?php
@@ -64,7 +65,7 @@ if (!isset($_SESSION["utente"]))
                         $utID = $row['utID'];
                         $e = $row['email'];
                         echo "<div class=\"bordo\">
-                                <a href=\"./articolo.php?id=$ID\"><img src=\"$foto\" onerror=\"this.src='../images/default.png'\" width=\"200px\" height=\"200px\" \"></a>
+                                <a href=\"./articolo.php?idArt=$ID\"><img src=\"$foto\" onerror=\"this.src='../images/default.png'\" width=\"200px\" height=\"200px\" \"></a>
                                 <h3>$nome</h3>
                                 <p>$tipologia</p>
                                 <p>Caricata da:<br><a href=\"./utente.php?id=$utID\">$e<a></p> 

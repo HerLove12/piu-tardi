@@ -29,19 +29,20 @@ if (!isset($_SESSION["utente"]))
         $sql = "SELECT nome, cognome FROM utente WHERE id = " . $_SESSION["utente"] . "";
         $result = $conn->query($sql);
         $row = $result->fetch_assoc();
-        echo "<h1>Benvenuto " . $row["nome"] . " " . $row["cognome"] . "</h1>";
+        echo "<h1>Benvenuto/a " . $row["nome"] . " " . $row["cognome"] . "</h1>";
     }
     ?>
+    <a href="shop.php">Torna alla Home</a>
     <div>
         <!-- menu a tendina categorie -->
-        <form action="utente.php" method="GET">
-            <select name="filtro">
-                <option value="0">-nessun filtro-</option>
-                <?php
-                $ut = $_GET["id"];
-
+            <form action="utente.php" method="GET">
+                <select name="filtro" onchange="this.form.submit()">;
+                    <option value="0" hidden></option>
+                    <option value="0">Nessun Filtro</option>
+                    <?php
                 $sql = "SELECT nome, ID FROM tipologia";
                 $result = $conn->query($sql);
+                
                 if ($result->num_rows > 0) {
                     while ($row = $result->fetch_assoc()) {
                         $nome = $row['nome'];
@@ -52,7 +53,7 @@ if (!isset($_SESSION["utente"]))
                     echo "<input type=\"hidden\" name=\"id\" value=\"$ut\">"; // input nascosto per passare l'id dell'utente
                 }
                 ?>
-                <input type="submit">
+                <label for="filtro">Filtro</label>
         </form>
         <div><!-- dashboard articoli -->
             <?php
@@ -77,7 +78,7 @@ if (!isset($_SESSION["utente"]))
                         $tipologia = $row['tip'];
                         $ID = $row['ID'];
                         echo "<div class=\"bordo\">
-                                <a href=\"./articolo.php?id=$ID\"><img src=\"$foto\" onerror=\"this.src='../images/default.png'\" width=\"200px\" height=\"200px\" \"></a>
+                                <a href=\"./articolo.php?idArt=$ID\"><img src=\"$foto\" onerror=\"this.src='../images/default.png'\" width=\"200px\" height=\"200px\" \"></a>
                                 <h3>$nome</h3>
                                 <p>$tipologia</p>
                             </div>";

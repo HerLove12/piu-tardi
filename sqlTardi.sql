@@ -8,7 +8,7 @@ CREATE TABLE utente(
     eta int(11) DEFAULT NOT NULL,
     classe varchar(30) NOT NULL,
     email varchar(30) NOT NULL,
-	foto varchar(50),
+	foto varchar(50)
 );
 
 CREATE TABLE tipologia(
@@ -19,7 +19,7 @@ CREATE TABLE tipologia(
 CREATE TABLE annuncio(
 	ID int(11) PRIMARY KEY auto_increment,
     nome varchar(30) NOT NULL,
-    descrizioni varchar(50) DEFAULT NULL,
+    descrizione varchar(255) DEFAULT NULL,
     foto varchar(50),
     datacaricamento date DEFAULT current_timestamp(),
     ID_utente int(11) NOT NULL,
@@ -39,6 +39,15 @@ CREATE TABLE proposta(
     FOREIGN KEY (ID_utente) REFERENCES utente(ID) ON UPDATE CASCADE ON DELETE CASCADE,
     FOREIGN KEY (ID_annuncio) REFERENCES annuncio(ID) ON UPDATE CASCADE ON DELETE CASCADE
 );
+
+/*
+CREATE TABLE foto(
+    ID int(11) PRIMARY KEY auto_increment,
+    URL varchar(50) NOT NULL,
+    ID_annuncio int(11) NOT NULL,
+    FOREIGN KEY (ID_annuncio) REFERENCES annuncio(ID) ON UPDATE CASCADE ON DELETE CASCADE
+);
+*/
 
 /*---------------- ESEMPI --------------------*/
 INSERT INTO utente (password, nome, cognome, eta, classe, email, foto) VALUES ('ef92b778bafe771e89245b89ecbc08a44a4e166c06659911881f383d4473e94f', 'Alice', 'Rossi', 25, 'A', 'alice@email.com', 'alice.jpg');

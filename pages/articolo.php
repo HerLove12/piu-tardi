@@ -16,12 +16,13 @@ if (!isset($_SESSION["utente"]))
 </head>
 
 <body>
+    <a href="shop.php">Torna alla Home</a>
     <?php
-    $ut = $_GET["id"];
+    $art = $_GET["idArt"];
     $sql = "SELECT a.id, a.nome AS nome, a.descrizioni AS descr, a.foto AS foto, a.datacaricamento AS data, t.nome AS tipo, u.email AS email, u.ID as utID FROM annuncio AS a
         JOIN tipologia AS t ON t.ID = a.ID_tipologia
         JOIN utente AS u ON u.ID = a.ID_utente
-        WHERE a.ID = $ut";
+        WHERE a.ID = $art";
     $result = $conn->query($sql);
     while ($row = $result->fetch_assoc()) {
         $id = $row["id"];
@@ -39,7 +40,7 @@ if (!isset($_SESSION["utente"]))
         echo "<h3>$d</h3>";
         echo "<p>Caricata da:<br><a href=\"./utente.php?id=$utID\">$e<a></p>"; //LINK DIRETTO ALL'UTENTE
         echo "<p>$t - $newData</p>";
-        if ($ut != $_SESSION["utente"]){
+        if ($utID != $_SESSION["utente"]) {
             echo "<button id=\"proposta\">Fai una Proposta</button>";
             echo "<script>var id = '" . $id . "';</script>";
         }
@@ -47,7 +48,7 @@ if (!isset($_SESSION["utente"]))
     if (isset($_SESSION["messaggio"]) or !empty($_SESSION["messaggio"])) {
         echo "<p>{$_SESSION["messaggio"]}</p>";
         unset($_SESSION["messaggio"]);
-      }
+    }
     ?>
 </body>
 <script>
@@ -75,7 +76,7 @@ if (!isset($_SESSION["utente"]))
         input.min = 0;
         input.required = true;
         form.appendChild(input);
-        
+
         const hiddenInput = document.createElement("input");
         hiddenInput.type = "hidden";
         hiddenInput.name = "id";
