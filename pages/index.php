@@ -16,9 +16,12 @@ if (!isset($_SESSION["utente"]))
 </head>
 
 <body>
-        <?php
-            echo "<a href=\"./utente.php?id=". $_SESSION["utente"] ."\"><img class=\"foto_profilo\" src=\"...\" onerror=\"this.src='../images/default.png'\"></a>";// da definire la gestione delle foto
-        ?>
+    <?php
+    $sql = "SELECT foto FROM utente WHERE utente.ID = {$_SESSION["utente"]}";
+    $result = $conn->query($sql);
+    $f = $result->fetch_assoc()["foto"];
+    echo "<a href=\"./utente.php?id=" . $_SESSION["utente"] . "\"><img class=\"foto_profilo\" src=\"$f\" onerror=\"this.src='../images/default.png'\"></a>";
+    ?>
     <div>
         <!-- menu a tendina categorie -->
         <form action="shop.php" method="GET">
@@ -45,7 +48,7 @@ if (!isset($_SESSION["utente"]))
             $sql = "SELECT annuncio.ID, annuncio.nome, annuncio.foto, tipologia.nome AS tip, utente.ID AS utID, utente.email AS email FROM annuncio
                         JOIN tipologia ON tipologia.ID = annuncio.ID_tipologia
                         JOIN utente ON utente.ID = annuncio.ID_utente
-                        WHERE utente.ID != ". $_SESSION["utente"] ."";
+                        WHERE utente.ID != " . $_SESSION["utente"] . "";
 
             $filtro;
             if (isset($_GET["filtro"]) and $_GET["filtro"] != 0) {

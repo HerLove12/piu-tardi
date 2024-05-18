@@ -19,7 +19,10 @@ if (!isset($_SESSION["utente"]))
     <?php
     $ut = $_GET["id"];
     if ($ut != $_SESSION["utente"]) {
-        echo "<a href=\"./utente.php?id=" . $_SESSION["utente"] . "\"><img class=\"foto_profilo\" src=\"...\" onerror=\"this.src='../images/default.png'\"></a>"; // da definire la gestione delle foto
+        $sql = "SELECT foto FROM utente WHERE utente.ID = {$_SESSION["utente"]}";
+        $result = $conn->query($sql);
+        $f = $result->fetch_assoc()["foto"];
+        echo "<a href=\"./utente.php?id=" . $_SESSION["utente"] . "\"><img class=\"foto_profilo\" src=\"$f\" onerror=\"this.src='../images/default.png'\"></a>";
         $sql = "SELECT * FROM utente WHERE ID = $ut";
         $result = $conn->query($sql);
         $row = $result->fetch_assoc();
@@ -32,17 +35,29 @@ if (!isset($_SESSION["utente"]))
         echo "<h1>Benvenuto/a " . $row["nome"] . " " . $row["cognome"] . "</h1>";
     }
     ?>
-    <a href="shop.php">Torna alla Home</a>
+    <a href="index.php">Torna alla Home</a>
+    <br>
+    <a href="./creaAnnuncio.php">Crea un nuovo Annuncio</a>
+    <br>
+    <button id="CambiaFoto">Cambia Foto Profilo</button>
+    <br>
+    <?php
+    if (isset($_SESSION["mess"])) {
+        echo "<p>" . $_SESSION["mess"] . "</p>";
+        unset($_SESSION["mess"]);
+    }
+    ?>
+    <br>
     <div>
         <!-- menu a tendina categorie -->
-            <form action="utente.php" method="GET">
-                <select name="filtro" onchange="this.form.submit()">;
-                    <option value="0" hidden></option>
-                    <option value="0">Nessun Filtro</option>
-                    <?php
+        <form action="utente.php" method="GET">
+            <select name="filtro" onchange="this.form.submit()">;
+                <option value="0" hidden></option>
+                <option value="0">Nessun Filtro</option>
+                <?php
                 $sql = "SELECT nome, ID FROM tipologia";
                 $result = $conn->query($sql);
-                
+
                 if ($result->num_rows > 0) {
                     while ($row = $result->fetch_assoc()) {
                         $nome = $row['nome'];
@@ -94,5 +109,50 @@ if (!isset($_SESSION["utente"]))
         </div>
     </div>
 </body>
+<script>
+    function showProposalForm() {
+        // Create the overlay div
+        const overlay = document.createElement("div");
+        overlay.classList.add("overlay");
+        document.body.appendChild(overlay);
+
+        // Create the form div
+        const formDiv = document.createElement("div");
+        formDiv.classList.add("form-div");
+        overlay.appendChild(formDiv);
+
+        // Create the form elements
+        const form = document.createElement("form");
+        form.action = "./CambiaFotoProfilo.php";
+        form.method = "post";
+        form.enctype = "multipart/form-data";
+        formDiv.appendChild(form);
+
+        const input = document.createElement("input");
+        input.type = "file";
+        input.name = "foto";
+        input.required = true;
+        form.appendChild(input);
+
+        const buttons = document.createElement("div");
+        form.appendChild(buttons);
+
+        const submitButton = document.createElement("button");
+        submitButton.type = "submit";
+        submitButton.textContent = "Invia";
+        buttons.appendChild(submitButton);
+
+        const cancelButton = document.createElement("button");
+        cancelButton.type = "button";
+        cancelButton.textContent = "Annulla";
+        cancelButton.onclick = () => {
+            overlay.remove();
+        };
+        buttons.appendChild(cancelButton);
+    }
+
+    // Add event listener to the "CambiaFoto" button
+    document.getElementById("CambiaFoto").addEventListener("click", showProposalForm);
+</script>
 
 </html>

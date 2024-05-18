@@ -18,7 +18,7 @@ if (is_bool($result)) {
     if ($result->num_rows > 0) {
       $row = $result->fetch_assoc();
       $_SESSION["utente"] = $row["ID"];
-      header("Location: ./shop.php");
+      header("Location: ./index.php");
     } else {
       $_SESSION["errore"] = "PASSWORD ERRATA";
       header("Location: ../index.php");

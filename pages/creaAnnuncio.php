@@ -16,6 +16,13 @@ if (!isset($_SESSION["utente"]))
 </head>
 
 <body>
+    <?php
+    $sql = "SELECT foto FROM utente WHERE utente.ID = {$_SESSION["utente"]}";
+    $result = $conn->query($sql);
+    $f = $result->fetch_assoc()["foto"];
+    echo "<a href=\"./utente.php?id=" . $_SESSION["utente"] . "\"><img class=\"foto_profilo\" src=\"$f\" onerror=\"this.src='../images/default.png'\"></a>";
+    ?>
+    <a href="./index.php">Torna alla Home</a>
     <form action="./creaAnnuncioScript.php" method="post" enctype="multipart/form-data">
         <label for="nome">Nome Articolo</label><br>
         <input type="text" name="nome" required>

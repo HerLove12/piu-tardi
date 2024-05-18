@@ -16,10 +16,15 @@ if (!isset($_SESSION["utente"]))
 </head>
 
 <body>
-    <a href="shop.php">Torna alla Home</a>
+
+    <a href="index.php">Torna alla Home</a>
     <?php
+    $sql = "SELECT foto FROM utente WHERE utente.ID = {$_SESSION["utente"]}";
+    $result = $conn->query($sql);
+    $f = $result->fetch_assoc()["foto"];
+    echo "<a href=\"./utente.php?id=" . $_SESSION["utente"] . "\"><img class=\"foto_profilo\" src=\"$f\" onerror=\"this.src='../images/default.png'\"></a>";
     $art = $_GET["idArt"];
-    $sql = "SELECT a.id, a.nome AS nome, a.descrizioni AS descr, a.foto AS foto, a.datacaricamento AS data, t.nome AS tipo, u.email AS email, u.ID as utID FROM annuncio AS a
+    $sql = "SELECT a.id, a.nome AS nome, a.descrizione AS descr, a.foto AS foto, a.datacaricamento AS data, t.nome AS tipo, u.email AS email, u.ID as utID FROM annuncio AS a
         JOIN tipologia AS t ON t.ID = a.ID_tipologia
         JOIN utente AS u ON u.ID = a.ID_utente
         WHERE a.ID = $art";
@@ -34,9 +39,8 @@ if (!isset($_SESSION["utente"]))
         $e = $row["email"];
         $t = $row["tipo"];
         $utID = $row["utID"];
-        $imgURL = "../images/" . $f; // DA DECIDERE LA MODIFICA DELL'IMMAGINE
         echo "<h1>$n</h1>";
-        echo "<img src=\"$imgURL\" onerror=\"this.src='../images/default.png'\" width=\"200px\" height=\"200px\"><br>";
+        echo "<img src=\"$f\" onerror=\"this.src='../images/default.png'\" width=\"200px\" height=\"200px\"><br>";
         echo "<h3>$d</h3>";
         echo "<p>Caricata da:<br><a href=\"./utente.php?id=$utID\">$e<a></p>"; //LINK DIRETTO ALL'UTENTE
         echo "<p>$t - $newData</p>";
