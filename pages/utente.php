@@ -41,6 +41,8 @@ if (!isset($_SESSION["utente"]))
     <br>
     <a href="./proposteRicevute.php ">Controlla Proposte Ricevute</a>
     <br>
+    <a href="./proposteFatte.php ">Controlla Proposte Fatte</a>
+    <br>
     <button id="CambiaFoto">Cambia Foto Profilo</button>
     <br>
     <?php
