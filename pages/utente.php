@@ -39,6 +39,8 @@ if (!isset($_SESSION["utente"]))
     <br>
     <a href="./creaAnnuncio.php">Crea un nuovo Annuncio</a>
     <br>
+    <a href="./proposteRicevute.php ">Controlla Proposte Ricevute</a>
+    <br>
     <button id="CambiaFoto">Cambia Foto Profilo</button>
     <br>
     <?php

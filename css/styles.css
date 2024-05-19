@@ -47,3 +47,15 @@
     display: flex;
     justify-content: space-around;
 }
+
+.in-attesa{
+    background-color: rgba(255, 255, 0, 0.5);
+}
+
+.rifiutata{
+    background-color: rgba(255, 0, 0, 0.5);
+}
+
+.accettata{
+    background-color: rgba(0, 255, 0, 0.5);
+}

@@ -24,7 +24,7 @@ if (!isset($_SESSION["utente"]))
     ?>
     <div>
         <!-- menu a tendina categorie -->
-        <form action="shop.php" method="GET">
+        <form action="index.php" method="GET">
             <select name="filtro" onchange="this.form.submit()">;
                 <option value="0" hidden></option>
                 <option value="0">Nessun Filtro</option>
