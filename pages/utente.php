@@ -37,15 +37,19 @@ if (!isset($_SESSION["utente"]))
     ?>
     <a href="index.php">Torna alla Home</a>
     <br>
-    <a href="./creaAnnuncio.php">Crea un nuovo Annuncio</a>
-    <br>
-    <a href="./proposteRicevute.php ">Controlla Proposte Ricevute</a>
-    <br>
-    <a href="./proposteFatte.php ">Controlla Proposte Fatte</a>
-    <br>
-    <button id="CambiaFoto">Cambia Foto Profilo</button>
-    <br>
     <?php
+    if ($ut == $_SESSION["utente"]) {
+        echo "<a href=\"./creaAnnuncio.php\">Crea un nuovo Annuncio</a>
+        <br>
+        <a href=\"./proposteRicevute.php\">Controlla Proposte Ricevute</a>
+        <br>
+        <a href=\"./proposteFatte.php\">Controlla Proposte Fatte</a>
+        <br>
+        <button id=\"CambiaFoto\">Cambia Foto Profilo</button>
+        <br>
+        <button id=\"toggleButton\">Elimina Annuncio</button>
+        <br>";
+    }
     if (isset($_SESSION["mess"])) {
         echo "<p>" . $_SESSION["mess"] . "</p>";
         unset($_SESSION["mess"]);
@@ -76,17 +80,27 @@ if (!isset($_SESSION["utente"]))
         </form>
         <div><!-- dashboard articoli -->
             <?php
-            $ut = $_GET["id"];
             $sql = "SELECT annuncio.ID, annuncio.nome, annuncio.foto, tipologia.nome AS tip FROM annuncio
                         JOIN tipologia ON tipologia.ID = annuncio.ID_tipologia
                         JOIN utente ON utente.ID = annuncio.ID_utente";
-
-            $filtro;
-            if (isset($_GET["filtro"]) and $_GET["filtro"] != 0) {
-                $filtro = $_GET["filtro"];
-                $sql = $sql . " WHERE tipologia.ID = $filtro AND utente.ID = $ut";
-            } else
-                $sql = $sql . " WHERE utente.ID = $ut";
+            if ($ut != $_SESSION["utente"]) {
+                $sql .= " WHERE annuncio.ID NOT IN (SELECT annuncio.ID FROM annuncio 
+                                                    JOIN proposta ON annuncio.ID = proposta.ID_annuncio
+                                                    WHERE stato LIKE \"b-accettata\")";
+                $filtro;
+                if (isset($_GET["filtro"]) and $_GET["filtro"] != 0) {
+                    $filtro = $_GET["filtro"];
+                    $sql .= " AND tipologia.ID = $filtro AND utente.ID = $ut";
+                } else
+                    $sql .= " AND utente.ID = $ut";
+            } else {
+                $filtro;
+                if (isset($_GET["filtro"]) and $_GET["filtro"] != 0) {
+                    $filtro = $_GET["filtro"];
+                    $sql .= " WHERE tipologia.ID = $filtro AND utente.ID = $ut";
+                } else
+                    $sql .= " WHERE utente.ID = $ut";
+            }
 
             $result = $conn->query($sql);
             if ($result) {
@@ -100,6 +114,7 @@ if (!isset($_SESSION["utente"]))
                                 <a href=\"./articolo.php?idArt=$ID\"><img src=\"$foto\" onerror=\"this.src='../images/default.png'\" width=\"200px\" height=\"200px\" \"></a>
                                 <h3>$nome</h3>
                                 <p>$tipologia</p>
+                                <button class=\"buttons-container\"><a href=\"./eliminaAnnuncio.php?idArt=$ID\">Elimina</a></button>
                             </div>";
                     }
                 } else {
@@ -154,6 +169,21 @@ if (!isset($_SESSION["utente"]))
         };
         buttons.appendChild(cancelButton);
     }
+
+    function toggleButtons() {
+        const buttonsContainers = document.querySelectorAll('.buttons-container');
+        const b = document.getElementById('toggleButton');
+        buttonsContainers.forEach((container) => {
+            container.classList.toggle('show-buttons');
+        });
+        if(b.innerHTML == "Elimina Annuncio")
+            b.innerHTML = "Annulla";
+        else
+            b.innerHTML = "Elimina Annuncio";
+        
+    }
+
+    document.getElementById('toggleButton').addEventListener('click', toggleButtons);
 
     // Add event listener to the "CambiaFoto" button
     document.getElementById("CambiaFoto").addEventListener("click", showProposalForm);

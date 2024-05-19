@@ -39,14 +39,21 @@ if (!isset($_SESSION["utente"]))
         $e = $row["email"];
         $t = $row["tipo"];
         $utID = $row["utID"];
+        
         echo "<h1>$n</h1>";
         echo "<img src=\"$f\" onerror=\"this.src='../images/default.png'\" width=\"200px\" height=\"200px\"><br>";
         echo "<h3>$d</h3>";
         echo "<p>Caricata da:<br><a href=\"./utente.php?id=$utID\">$e<a></p>"; //LINK DIRETTO ALL'UTENTE
         echo "<p>$t - $newData</p>";
-        if ($utID != $_SESSION["utente"]) {
-            echo "<button id=\"proposta\">Fai una Proposta</button>";
-            echo "<script>var id = '" . $id . "';</script>";
+        if ($utID != $_SESSION["utente"]) { 
+            $sql = "SELECT stato FROM proposta WHERE ID_annuncio = $id AND stato = 'b-accettata'";
+            $result2 = $conn->query($sql);
+            if($result2->num_rows>0)
+                echo "Articolo gia' venduto, <a href=\"index.php\">Cerca qualcos'altro</a>";
+            else {
+                echo "<button id=\"proposta\">Fai una Proposta</button>";
+                echo "<script>var id = '" . $id . "';</script>";
+            }
         }
     }
     if (isset($_SESSION["messaggio"]) or !empty($_SESSION["messaggio"])) {

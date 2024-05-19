@@ -48,12 +48,15 @@ if (!isset($_SESSION["utente"]))
             $sql = "SELECT annuncio.ID, annuncio.nome, annuncio.foto, tipologia.nome AS tip, utente.ID AS utID, utente.email AS email FROM annuncio
                         JOIN tipologia ON tipologia.ID = annuncio.ID_tipologia
                         JOIN utente ON utente.ID = annuncio.ID_utente
-                        WHERE utente.ID != " . $_SESSION["utente"] . "";
+                        WHERE utente.ID != " . $_SESSION["utente"] . "
+                        AND annuncio.ID NOT IN (SELECT annuncio.ID FROM annuncio 
+                                                JOIN proposta ON annuncio.ID = proposta.ID_annuncio
+                                                WHERE stato LIKE \"b-accettata\")";
 
             $filtro;
             if (isset($_GET["filtro"]) and $_GET["filtro"] != 0) {
                 $filtro = $_GET["filtro"];
-                $sql = $sql . " AND tipologia.ID = $filtro";
+                $sql .= " AND tipologia.ID = $filtro";
             }
 
 

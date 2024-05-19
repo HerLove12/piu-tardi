@@ -43,19 +43,27 @@
     margin-bottom: 20px;
 }
 
-.form-div div{
+.form-div div {
     display: flex;
     justify-content: space-around;
 }
 
-.in-attesa{
+.in-attesa {
     background-color: rgba(255, 255, 0, 0.5);
 }
 
-.rifiutata{
+.rifiutata {
     background-color: rgba(255, 0, 0, 0.5);
 }
 
-.accettata{
+.accettata {
     background-color: rgba(0, 255, 0, 0.5);
+}
+
+.buttons-container {
+    display: none;
+}
+
+.buttons-container.show-buttons {
+    display: block;
 }

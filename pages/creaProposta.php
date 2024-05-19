@@ -9,7 +9,7 @@ $p = $_POST["proposta"];
 var_dump($id);
 var_dump($p);
 $sql = "INSERT INTO proposta (prezzo, ID_utente, ID_annuncio, stato)
-                VALUES ($p, " . $_SESSION["utente"] . ", $id, 'in attesa')";
+        VALUES ($p, " . $_SESSION["utente"] . ", $id, 'a-in attesa')";
 $result = $conn->query($sql);
 if (!$result) {
     $_SESSION["messaggio"] = "ERRORE NELL'INVIO DELLA PROPOSTA";

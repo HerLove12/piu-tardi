@@ -75,7 +75,7 @@ if (!isset($_SESSION["utente"]))
                 </div>";
         }
     } else {
-        echo "<h1>NESSUNA PROPOSTA RICEVUTA<h1>";
+        echo "<h1>NESSUNA PROPOSTA FATTA<h1>";
     }
     ?>
 
