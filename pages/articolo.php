@@ -46,10 +46,10 @@ if (!isset($_SESSION["utente"]))
         echo "<p>Caricata da:<br><a href=\"./utente.php?id=$utID\">$e<a></p>"; //LINK DIRETTO ALL'UTENTE
         echo "<p>$t - $newData</p>";
         if ($utID != $_SESSION["utente"]) { 
-            $sql = "SELECT stato FROM proposta WHERE ID_annuncio = $id AND stato = 'b-accettata'";
+            $sql = "SELECT * FROM proposta WHERE ID_annuncio = $id AND stato = 'b-accettata'";
             $result2 = $conn->query($sql);
             if($result2->num_rows>0)
-                echo "Articolo gia' venduto, <a href=\"index.php\">Cerca qualcos'altro</a>";
+                echo "<h3>Articolo gia' venduto, <a href=\"./index.php\">Cerca qualcos'altro</a></h3>";
             else {
                 echo "<button id=\"proposta\">Fai una Proposta</button>";
                 echo "<script>var id = '" . $id . "';</script>";
