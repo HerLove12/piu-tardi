@@ -73,8 +73,8 @@ if (!isset($_SESSION["utente"]))
                     <p>Prezzo Proposto: <b>$prezzo €</b></p>
                     <p>$newData</p>";
             if ($s == 'a-in attesa')
-                echo "<a href=\"./gestisciStato.php?ID=$prodID&stato='b-accettata'\"><button>Accetta</button></a>
-                    <a href=\"./gestisciStato.php?ID=$prodID&stato='c-rifiutata'\"><button>Rifiuta</button></a>";
+                echo "<a href=\"./proposteRicevuteScript.php?ID=$prodID&stato=b-accettata&IDann=$ID\"><button>Accetta</button></a>
+                    <a href=\"./proposteRicevuteScript.php?ID=$prodID&stato=c-rifiutata\"><button>Rifiuta</button></a>";
             echo "</div>";
         }
     } else {

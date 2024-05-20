@@ -5,7 +5,7 @@ CREATE TABLE utente(
     password varchar(256) NOT NULL,
     nome varchar(30) NOT NULL,
     cognome varchar(30) NOT NULL,
-    eta int(11) DEFAULT NOT NULL,
+    eta int(11) NOT NULL,
     classe varchar(30) NOT NULL,
     email varchar(30) NOT NULL,
 	foto varchar(50)
@@ -29,7 +29,7 @@ CREATE TABLE annuncio(
 );
 
 CREATE TABLE proposta(
-	ID int(11) NOT NULL,
+	ID int(11) PRIMARY KEY auto_increment,
     prezzo int(11) NOT NULL,
     ID_utente int(11) NOT NULL,
     dataproposta date DEFAULT current_timestamp(),

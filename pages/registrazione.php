@@ -36,7 +36,7 @@ session_start();
     <label for="passwordConferma">CONFERMA PASSWORD</label>
     <br><br>
 
-    <input type="submit" value="SUBMIT">
+    <input type="submit" value="SUBMIT" id="invia">
   </form>
   <p><a href="../index.php">LOGIN</a></p>
   <?php
@@ -78,9 +78,11 @@ session_start();
       passwordConfirmInput.style.border = '1px solid red';
       errorText.textContent = 'Le due password non coincidono';
       passwordConfirmInput.parentNode.appendChild(errorText);
+      document.getElementById("invia").disabled = true;
     } else {
       passwordConfirmInput.style.border = '1px solid black';
       passwordConfirmInput.parentNode.removeChild(errorText);
+      document.getElementById("invia").disabled = false;
     }
   }
 </script>
