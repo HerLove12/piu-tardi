@@ -1,6 +1,6 @@
 <?php
 session_start();
-include("./connessione.php");
+include ("./connessione.php");
 if (!isset($_SESSION["utente"]))
     header("Location: ../index.php");
 ?>
@@ -12,73 +12,143 @@ if (!isset($_SESSION["utente"]))
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>negozio</title>
-    <link rel="stylesheet" href="../css/styles.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <style>
+        body,
+        html {
+            height: 100%;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: #f8f9fa;
+        }
+
+        .centered-content {
+            width: 100%;
+            max-width: 800px;
+            padding: 30px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            background-color: #fff;
+            margin-top: 20px;
+        }
+
+        .foto_profilo {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .bordo {
+            border: 1px solid #ddd;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .bordo img {
+            width: 100%;
+            height: auto;
+            max-width: 200px;
+            max-height: 200px;
+        }
+
+        a {
+            color: white;
+            text-decoration: none;
+        }
+
+        a:hover {
+            color: white;
+            text-decoration: none;
+        }
+
+        .buttons-container a {
+            color: white;
+            text-decoration: none;
+        }
+
+        .buttons-container a:hover {
+            color: white;
+            text-decoration: none;
+        }
+    </style>
 </head>
 
 <body>
-    <?php
-    $ut = $_GET["id"];
-    if ($ut != $_SESSION["utente"]) {
-        $sql = "SELECT foto FROM utente WHERE utente.ID = {$_SESSION["utente"]}";
-        $result = $conn->query($sql);
-        $f = $result->fetch_assoc()["foto"];
-        echo "<a href=\"./utente.php?id=" . $_SESSION["utente"] . "\"><img class=\"foto_profilo\" src=\"$f\" onerror=\"this.src='../images/default.png'\"></a>";
-        $sql = "SELECT * FROM utente WHERE ID = $ut";
-        $result = $conn->query($sql);
-        $row = $result->fetch_assoc();
-        $e = $row["email"];
-        echo "<h1>$e</h1>";
-    } else {
-        $sql = "SELECT nome, cognome FROM utente WHERE id = " . $_SESSION["utente"] . "";
-        $result = $conn->query($sql);
-        $row = $result->fetch_assoc();
-        echo "<h1>Benvenuto/a " . $row["nome"] . " " . $row["cognome"] . "</h1>";
-    }
-    ?>
-    <a href="index.php">Torna alla Home</a>
-    <br>
-    <?php
-    if ($ut == $_SESSION["utente"]) {
-        echo "<a href=\"./creaAnnuncio.php\">Crea un nuovo Annuncio</a>
+    <div class="centered-content">
+        <?php
+        $ut = $_GET["id"];
+        if ($ut != $_SESSION["utente"]) {
+            $sql = "SELECT foto FROM utente WHERE utente.ID = {$_SESSION["utente"]}";
+            $result = $conn->query($sql);
+            $f = $result->fetch_assoc()["foto"];
+            echo "<a href=\"./utente.php?id=" . $_SESSION["utente"] . "\"><img class=\"foto_profilo\" src=\"$f\" onerror=\"this.src='../images/default.png'\"></a>";
+            $sql = "SELECT * FROM utente WHERE ID = $ut";
+            $result = $conn->query($sql);
+            $row = $result->fetch_assoc();
+            $e = $row["email"];
+            echo "<h1>$e</h1>";
+        } else {
+            $sql = "SELECT nome, cognome FROM utente WHERE id = " . $_SESSION["utente"] . "";
+            $result = $conn->query($sql);
+            $row = $result->fetch_assoc();
+            echo "<h1>Benvenuto/a " . $row["nome"] . " " . $row["cognome"] . "</h1>";
+        }
+        ?>
+        <a href="index.php" class="btn btn-primary mt-3">Torna alla Home</a>
         <br>
-        <a href=\"./proposteRicevute.php\">Controlla Proposte Ricevute</a>
+        <?php
+        if ($ut == $_SESSION["utente"]) {
+            echo "<a href=\"./creaAnnuncio.php\" class=\"btn btn-secondary mt-2\">Crea un nuovo Annuncio</a>
+            <br>
+            <a href=\"./proposteRicevute.php\" class=\"btn btn-secondary mt-2\">Controlla Proposte Ricevute</a>
+            <br>
+            <a href=\"./proposteFatte.php\" class=\"btn btn-secondary mt-2\">Controlla Proposte Fatte</a>
+            <br>
+            <button id=\"CambiaFoto\" class=\"btn btn-warning mt-2\">Cambia Foto Profilo</button>
+            <br>
+            <a class=\"btn btn-danger mt-2\" href=\"logout.php\">Log Out</a>
+            <br>
+            <button id=\"toggleButton\" class=\"btn btn-danger mt-2\">Elimina Annuncio</button>
+            <br>";
+        }
+        if (isset($_SESSION["mess"])) {
+            echo "<p class=\"mt-3 alert alert-info\">" . $_SESSION["mess"] . "</p>";
+            unset($_SESSION["mess"]);
+        }
+        ?>
         <br>
-        <a href=\"./proposteFatte.php\">Controlla Proposte Fatte</a>
-        <br>
-        <button id=\"CambiaFoto\">Cambia Foto Profilo</button>
-        <br>
-        <button id=\"toggleButton\">Elimina Annuncio</button>
-        <br>";
-    }
-    if (isset($_SESSION["mess"])) {
-        echo "<p>" . $_SESSION["mess"] . "</p>";
-        unset($_SESSION["mess"]);
-    }
-    ?>
-    <br>
-    <div>
-        <!-- menu a tendina categorie -->
-        <form action="utente.php" method="GET">
-            <select name="filtro" onchange="this.form.submit()">;
-                <option value="0" hidden></option>
-                <option value="0">Nessun Filtro</option>
-                <?php
-                $sql = "SELECT nome, ID FROM tipologia";
-                $result = $conn->query($sql);
+        <div>
+            <!-- menu a tendina categorie -->
+            <form action="utente.php" method="GET" class="form-inline">
+                <label for="filtro" class="mr-2">Filtro</label>
+                <select name="filtro" class="form-control mr-2" onchange="this.form.submit()">
+                    <option value="0" hidden></option>
+                    <option value="0">Nessun Filtro</option>
+                    <?php
+                    $sql = "SELECT nome, ID FROM tipologia";
+                    $result = $conn->query($sql);
 
-                if ($result->num_rows > 0) {
-                    while ($row = $result->fetch_assoc()) {
-                        $nome = $row['nome'];
-                        $ID = $row['ID'];
-                        echo "<option value=\"$ID\">$nome</option>";
+                    if ($result->num_rows > 0) {
+                        while ($row = $result->fetch_assoc()) {
+                            $nome = $row['nome'];
+                            $ID = $row['ID'];
+                            echo "<option value=\"$ID\">$nome</option>";
+                        }
                     }
-                    echo "</select>";
-                    echo "<input type=\"hidden\" name=\"id\" value=\"$ut\">"; // input nascosto per passare l'id dell'utente
-                }
-                ?>
-                <label for="filtro">Filtro</label>
-        </form>
-        <div><!-- dashboard articoli -->
+                    ?>
+                </select>
+                <input type="hidden" name="id" value="<?php echo $ut; ?>">
+            </form>
+        </div>
+        <div class="mt-4">
+            <!-- dashboard articoli -->
             <?php
             $sql = "SELECT annuncio.ID, annuncio.nome, annuncio.foto, tipologia.nome AS tip FROM annuncio
                         JOIN tipologia ON tipologia.ID = annuncio.ID_tipologia
@@ -87,19 +157,19 @@ if (!isset($_SESSION["utente"]))
                 $sql .= " WHERE annuncio.ID NOT IN (SELECT annuncio.ID FROM annuncio 
                                                     JOIN proposta ON annuncio.ID = proposta.ID_annuncio
                                                     WHERE stato LIKE \"b-accettata\")";
-                $filtro;
                 if (isset($_GET["filtro"]) and $_GET["filtro"] != 0) {
                     $filtro = $_GET["filtro"];
                     $sql .= " AND tipologia.ID = $filtro AND utente.ID = $ut";
-                } else
+                } else {
                     $sql .= " AND utente.ID = $ut";
+                }
             } else {
-                $filtro;
                 if (isset($_GET["filtro"]) and $_GET["filtro"] != 0) {
                     $filtro = $_GET["filtro"];
                     $sql .= " WHERE tipologia.ID = $filtro AND utente.ID = $ut";
-                } else
+                } else {
                     $sql .= " WHERE utente.ID = $ut";
+                }
             }
 
             $result = $conn->query($sql);
@@ -111,17 +181,17 @@ if (!isset($_SESSION["utente"]))
                         $tipologia = $row['tip'];
                         $ID = $row['ID'];
                         echo "<div class=\"bordo\">
-                                <a href=\"./articolo.php?idArt=$ID\"><img src=\"$foto\" onerror=\"this.src='../images/default.png'\" width=\"200px\" height=\"200px\" \"></a>
+                                <a href=\"./articolo.php?idArt=$ID\"><img src=\"$foto\" onerror=\"this.src='../images/default.png'\"></a>
                                 <h3>$nome</h3>
                                 <p>$tipologia</p>
-                                <button class=\"buttons-container\"><a href=\"./eliminaAnnuncio.php?idArt=$ID\">Elimina</a></button>
+                                <button class=\"btn btn-danger\"><a href=\"./eliminaAnnuncio.php?idArt=$ID\">Elimina</a></button>
                             </div>";
                     }
                 } else {
-                    echo "<h1>NESSUN ANNUNCIO PRESENTE<h1>";
+                    echo "<p style=\"color:red\">NESSUN ANNUNCIO PRESENTE</p>";
                 }
             } else {
-                echo "<h1>errore nella query</h1>";
+                echo "<h1>Errore nella query</h1>";
                 echo "<p>$sql</p>";
             }
             ?>
@@ -132,12 +202,12 @@ if (!isset($_SESSION["utente"]))
     function showProposalForm() {
         // Create the overlay div
         const overlay = document.createElement("div");
-        overlay.classList.add("overlay");
+        overlay.classList.add("overlay", "d-flex", "justify-content-center", "align-items-center");
         document.body.appendChild(overlay);
 
         // Create the form div
         const formDiv = document.createElement("div");
-        formDiv.classList.add("form-div");
+        formDiv.classList.add("form-div", "p-4", "bg-white", "border", "rounded", "shadow");
         overlay.appendChild(formDiv);
 
         // Create the form elements
@@ -151,19 +221,23 @@ if (!isset($_SESSION["utente"]))
         input.type = "file";
         input.name = "foto";
         input.required = true;
+        input.classList.add("form-control", "mb-3");
         form.appendChild(input);
 
         const buttons = document.createElement("div");
+        buttons.classList.add("d-flex", "justify-content-between");
         form.appendChild(buttons);
 
         const submitButton = document.createElement("button");
         submitButton.type = "submit";
         submitButton.textContent = "Invia";
+        submitButton.classList.add("btn", "btn-primary");
         buttons.appendChild(submitButton);
 
         const cancelButton = document.createElement("button");
         cancelButton.type = "button";
         cancelButton.textContent = "Annulla";
+        cancelButton.classList.add("btn", "btn-secondary");
         cancelButton.onclick = () => {
             overlay.remove();
         };
@@ -176,11 +250,10 @@ if (!isset($_SESSION["utente"]))
         buttonsContainers.forEach((container) => {
             container.classList.toggle('show-buttons');
         });
-        if(b.innerHTML == "Elimina Annuncio")
+        if (b.innerHTML == "Elimina Annuncio")
             b.innerHTML = "Annulla";
         else
             b.innerHTML = "Elimina Annuncio";
-        
     }
 
     document.getElementById('toggleButton').addEventListener('click', toggleButtons);
@@ -188,5 +261,6 @@ if (!isset($_SESSION["utente"]))
     // Add event listener to the "CambiaFoto" button
     document.getElementById("CambiaFoto").addEventListener("click", showProposalForm);
 </script>
+
 
 </html>

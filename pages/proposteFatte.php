@@ -1,6 +1,6 @@
 <?php
 session_start();
-include("./connessione.php");
+include ("./connessione.php");
 if (!isset($_SESSION["utente"]))
     header("Location: ../index.php");
 ?>
@@ -12,11 +12,76 @@ if (!isset($_SESSION["utente"]))
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>negozio</title>
-    <link rel="stylesheet" href="../css/styles.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
+    <style>
+        .bordo {
+            /* solo per esempio */
+            border: 1px solid black;
+            padding: 10px;
+            margin: 10px;
+        }
+
+        .foto_profilo {
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            border: 1px solid black;
+        }
+
+        .overlay {
+            position: fixed;
+            top: 0px;
+            left: 0px;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+        }
+
+        .form-div {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgb(255, 255, 255);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: rgba(0, 0, 0, 0.5) 0px 0px 10px;
+        }
+
+        .form-div input {
+            border: 1px solid black;
+            border-radius: 5px;
+            padding: 5px;
+            margin-bottom: 20px;
+        }
+
+        .form-div div {
+            display: flex;
+            justify-content: space-around;
+        }
+
+        .in-attesa {
+            background-color: rgba(255, 255, 0, 0.5);
+        }
+
+        .rifiutata {
+            background-color: rgba(255, 0, 0, 0.5);
+        }
+
+        .accettata {
+            background-color: rgba(0, 255, 0, 0.5);
+        }
+    </style>
 </head>
 
 <body>
-    <a href="./index.php">Torna alla Home   </a>
+    <a href="./index.php">Torna alla Home </a>
     <?php
     $sql = "SELECT foto FROM utente WHERE utente.ID = {$_SESSION["utente"]}";
     $result = $conn->query($sql);
