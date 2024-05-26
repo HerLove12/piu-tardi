@@ -33,14 +33,9 @@ session_start();
     }
 
     a {
-      color: white;
       text-decoration: none;
     }
-
-    a:hover {
-      color: white;
-      text-decoration: none;
-    }
+    
   </style>
 </head>
 
@@ -66,12 +61,11 @@ session_start();
             </svg>
           </button>
           <hr>
-          <button type="submit" class="btn btn-primary mt-2 border">SUBMIT</button>
+          <button type="submit" class="btn btn-primary mt-2 border my-3">SUBMIT</button>
           <br>
         </div>
       </form>
-      <p class="mt-3 border rounded px-3 bg-primary"><a href="./pages/registrazione.php">Non hai un account? ->
-          REGISTRATI</a></p>
+      <a class="text-primary" href="./pages/registrazione.php">Non hai un account? REGISTRATI</a>
       <?php
       if (isset($_SESSION["errore"]) or !empty($_SESSION["errore"])) {
         echo "<p style=\"color:red\">{$_SESSION["errore"]}</p>";

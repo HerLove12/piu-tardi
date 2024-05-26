@@ -1,6 +1,6 @@
 <?php
 session_start();
-include ("./connessione.php");
+include("./connessione.php");
 if (!isset($_SESSION["utente"]))
     header("Location: ../index.php");
 ?>
@@ -12,8 +12,7 @@ if (!isset($_SESSION["utente"]))
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>negozio</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <style>
         body,
         html {
@@ -68,6 +67,15 @@ if (!isset($_SESSION["utente"]))
             text-decoration: none;
         }
 
+        .buttons-container {
+            display: none;
+            margin: auto;
+        }
+
+        .buttons-container.show-buttons {
+            display: block;
+        }
+
         .buttons-container a {
             color: white;
             text-decoration: none;
@@ -76,6 +84,16 @@ if (!isset($_SESSION["utente"]))
         .buttons-container a:hover {
             color: white;
             text-decoration: none;
+        }
+
+        .overlay {
+            position: fixed;
+            top: 0px;
+            left: 0px;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
         }
     </style>
 </head>
@@ -184,7 +202,7 @@ if (!isset($_SESSION["utente"]))
                                 <a href=\"./articolo.php?idArt=$ID\"><img src=\"$foto\" onerror=\"this.src='../images/default.png'\"></a>
                                 <h3>$nome</h3>
                                 <p>$tipologia</p>
-                                <button class=\"btn btn-danger\"><a href=\"./eliminaAnnuncio.php?idArt=$ID\">Elimina</a></button>
+                                <button class=\"btn btn-danger buttons-container\"><a href=\"./eliminaAnnuncio.php?idArt=$ID\">Elimina</a></button>
                             </div>";
                     }
                 } else {

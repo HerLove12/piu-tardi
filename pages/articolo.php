@@ -101,6 +101,7 @@ if (!isset($_SESSION["utente"]))
             background-color: #007bff;
             color: white;
             cursor: pointer;
+            margin: 3px;
         }
 
         .form-div input[type="submit"]:hover,
