@@ -14,6 +14,7 @@ if (!isset($_SESSION["utente"]))
     <title>negozio</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="../css/styles.css">
     <style>
         .foto_profilo {
             width: 100px;
@@ -25,7 +26,6 @@ if (!isset($_SESSION["utente"]))
         }
 
         body {
-            background-color: #f8f9fa;
             padding-top: 50px;
         }
 
@@ -35,6 +35,7 @@ if (!isset($_SESSION["utente"]))
             box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
             margin: 20px auto;
             max-width: 600px;
+            min-width: 450px;
         }
 
         .card-header {
@@ -119,10 +120,11 @@ if (!isset($_SESSION["utente"]))
         <div class="card-body">
             <a href="index.php" class="d-block text-center mb-4">Torna alla Home</a>
             <?php
-            $sql = "SELECT foto FROM utente WHERE utente.ID = {$_SESSION["utente"]}";
+            $ut = $_GET["ut"];
+            $sql = "SELECT foto FROM utente WHERE utente.ID = $ut";
             $result = $conn->query($sql);
             $f = $result->fetch_assoc()["foto"];
-            echo "<a href=\"./utente.php?id=" . $_SESSION["utente"] . "\"><img class=\"foto_profilo\" src=\"$f\" onerror=\"this.src='../images/default.png'\"></a>";
+            echo "<a href=\"./utente.php?id=" . $ut . "\"><img class=\"foto_profilo\" src=\"$f\" onerror=\"this.src='../images/default.png'\"></a>";
             $art = $_GET["idArt"];
             $sql = "SELECT a.id, a.nome AS nome, a.descrizione AS descr, a.foto AS foto, a.datacaricamento AS data, t.nome AS tipo, u.email AS email, u.ID as utID FROM annuncio AS a
                 JOIN tipologia AS t ON t.ID = a.ID_tipologia

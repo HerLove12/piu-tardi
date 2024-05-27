@@ -13,16 +13,8 @@ if (!isset($_SESSION["utente"]))
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>negozio</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="../css/styles.css">
     <style>
-        body,
-        html {
-            height: 100%;
-            margin: 0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            background-color: #f8f9fa;
-        }
 
         .centered-content {
             width: 100%;
@@ -103,10 +95,10 @@ if (!isset($_SESSION["utente"]))
         <?php
         $ut = $_GET["id"];
         if ($ut != $_SESSION["utente"]) {
-            $sql = "SELECT foto FROM utente WHERE utente.ID = {$_SESSION["utente"]}";
+            $sql = "SELECT foto FROM utente WHERE utente.ID = $ut";
             $result = $conn->query($sql);
             $f = $result->fetch_assoc()["foto"];
-            echo "<a href=\"./utente.php?id=" . $_SESSION["utente"] . "\"><img class=\"foto_profilo\" src=\"$f\" onerror=\"this.src='../images/default.png'\"></a>";
+            echo "<img class=\"foto_profilo\" src=\"$f\" onerror=\"this.src='../images/default.png'\">";
             $sql = "SELECT * FROM utente WHERE ID = $ut";
             $result = $conn->query($sql);
             $row = $result->fetch_assoc();
@@ -199,10 +191,10 @@ if (!isset($_SESSION["utente"]))
                         $tipologia = $row['tip'];
                         $ID = $row['ID'];
                         echo "<div class=\"bordo\">
-                                <a href=\"./articolo.php?idArt=$ID\"><img src=\"$foto\" onerror=\"this.src='../images/default.png'\"></a>
+                                <a href=\"./articolo.php?idArt=$ID&ut=$ut\"><img src=\"$foto\" onerror=\"this.src='../images/default.png'\"></a>
                                 <h3>$nome</h3>
                                 <p>$tipologia</p>
-                                <button class=\"btn btn-danger buttons-container\"><a href=\"./eliminaAnnuncio.php?idArt=$ID\">Elimina</a></button>
+                                <button class=\"btn btn-danger buttons-container\"><a href=\"./eliminaAnnuncio.php?idArt=$ID&ut=$ut\">Elimina</a></button>
                             </div>";
                     }
                 } else {

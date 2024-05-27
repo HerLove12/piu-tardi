@@ -79,7 +79,7 @@ session_start();
           <input type="password" class="form-control" name="passwordConferma" id="passwordConferma" required>
         </div>
         <hr>
-        <button type="submit" class="btn btn-primary mt-2 border my-3">SUBMIT</button>
+        <button type="submit" id="invia" class="btn btn-primary mt-2 border my-3">SUBMIT</button>
         <br>
       </form>
       <a class="text-primary" href="../index.php">Hai gia un account? FAI IL LOGIN</a>
@@ -111,6 +111,10 @@ session_start();
     const passwordConfirmInput = document.querySelector('input[name="passwordConferma"]');
     const errorText = document.createElement('p');
     errorText.style.color = 'red';
+    errorText.style.marginTop = '10px';
+    errorText.style.marginBottom = '10px';
+    passwordConfirmInput.textContent = "";
+    document.getElementById("invia").disabled = true;
 
     passwordInput2.addEventListener('input', () => {
       checkPasswords();
@@ -127,7 +131,7 @@ session_start();
         passwordConfirmInput.parentNode.appendChild(errorText);
         document.getElementById("invia").disabled = true;
       } else {
-        passwordConfirmInput.style.border = '1px solid black';
+        passwordConfirmInput.style.border = '1px solid lightgrey';
         passwordConfirmInput.parentNode.removeChild(errorText);
         document.getElementById("invia").disabled = false;
       }

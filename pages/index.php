@@ -1,6 +1,6 @@
 <?php
 session_start();
-include ("./connessione.php");
+include("./connessione.php");
 if (!isset($_SESSION["utente"]))
     header("Location: ../index.php");
 ?>
@@ -12,10 +12,17 @@ if (!isset($_SESSION["utente"]))
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>negozio</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 
     <style>
+        body {
+            background: rgb(61, 82, 160);
+            background: linear-gradient(150deg, rgba(61, 82, 160, 0.9559164733178654) 13%, rgba(112, 145, 230, 0.9118329466357309) 37%, rgba(134, 151, 196, 0.8561484918793504) 54%, rgba(173, 187, 218, 1) 68%, rgba(237, 232, 245, 1) 100%);
+            background-repeat: no-repeat;
+            background-size: cover;
+            min-height: 100vh;
+        }
+
         .foto_profilo {
             width: 50px;
             height: 50px;
@@ -25,20 +32,13 @@ if (!isset($_SESSION["utente"]))
         }
 
         .bordo {
-            border: 1px solid #dee2e6;
+            border: 1px solid black;
             border-radius: 5px;
             padding: 10px;
             margin-bottom: 20px;
             height: 400px;
             /* Adjust the height as needed */
             overflow: hidden;
-        }
-
-        .bordo img {
-            max-width: 100%;
-            max-height: 100%;
-            object-fit: cover;
-            /* Ensure the image covers the entire space without stretching */
         }
 
         .bordo h3,
@@ -50,7 +50,9 @@ if (!isset($_SESSION["utente"]))
         }
 
         .card-image img {
-            max-height: 200px;
+            height: 200px;
+            max-width: 200px;
+            object-fit: cover;
             /* Adjust this value as needed */
         }
     </style>
@@ -61,17 +63,14 @@ if (!isset($_SESSION["utente"]))
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container-fluid">
             <a class="navbar-brand" href="#">Piu'-tardi</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
-                aria-label="Toggle navigation">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <!-- Dropdown -->
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                            data-bs-toggle="dropdown" aria-expanded="false">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             Categorie
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -135,19 +134,18 @@ if (!isset($_SESSION["utente"]))
                     $ID = $row['ID'];
                     $utID = $row['utID'];
                     $e = $row['email'];
-                    ?>
-                    <div class="col-md-3">
-                        <div class="bordo">
+            ?>
+                    <div class="col-md-3" style="text-align:center;">
+                        <div class="bordo bg-light">
                             <div class="card-image">
-                                <a href="./articolo.php?idArt=<?php echo $ID; ?>"><img src="<?php echo $foto; ?>"
-                                        onerror="this.src='../images/default.png'" class="img-fluid"></a>
+                                <a href="./articolo.php?idArt=<?php echo $ID; ?>&ut=<?php echo $utID; ?>"><img src="<?php echo $foto; ?>" onerror="this.src='../images/default.png'" class="img-fluid"></a>
                             </div>
                             <h3><?php echo $nome; ?></h3>
                             <p><?php echo $tipologia; ?></p>
                             <p>Caricata da:<br><a href="./utente.php?id=<?php echo $utID; ?>"><?php echo $e; ?></a></p>
                         </div>
                     </div>
-                    <?php
+            <?php
                 }
             } else {
                 echo "<div class='col'><h1>NON SONO PRESENTI ARTICOLI</h1></div>";
@@ -156,9 +154,7 @@ if (!isset($_SESSION["utente"]))
         </div>
     </div>
 </body>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
-    crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 <script src="../js/script.js"></script>
 
 </html>
