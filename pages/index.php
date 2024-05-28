@@ -62,7 +62,7 @@ if (!isset($_SESSION["utente"]))
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#">Piu'-tardi</a>
+            <a class="navbar-brand" href="#">Più-tardi</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -148,7 +148,9 @@ if (!isset($_SESSION["utente"]))
             <?php
                 }
             } else {
-                echo "<div class='col'><h1>NON SONO PRESENTI ARTICOLI</h1></div>";
+                echo "<div class='col bordo bg-light d-flex justify-content-center align-items-center' style='height: 150px'>
+                        <h1>NON SONO PRESENTI ARTICOLI</h1>
+                      </div>";
             }
             ?>
         </div>
