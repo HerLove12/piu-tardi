@@ -2,9 +2,9 @@
 
 mysqli_report(MYSQLI_REPORT_OFF);
 
-$servernameDB = "my_mariadb";
+$servernameDB = "localhost";
 $usernameDB = "root";
-$passwordDB = "ciccio";
+$passwordDB = "";
 $databaseDB = "tardi";
 
 // Create connection

@@ -147,11 +147,10 @@ if (!isset($_SESSION["utente"]))
                     </div>
             <?php
                 }
-            } else {
+            } else
                 echo "<div class='col bordo bg-light d-flex justify-content-center align-items-center' style='height: 150px'>
                         <h1>NON SONO PRESENTI ARTICOLI</h1>
                       </div>";
-            }
             ?>
         </div>
     </div>

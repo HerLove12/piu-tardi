@@ -34,15 +34,16 @@ if (!isset($_SESSION["utente"]))
             object-fit: cover;
         }
 
-        .bordo {
-            border: 1px solid #ddd;
-            padding: 10px;
-            border-radius: 5px;
-            margin-bottom: 20px;
-            text-align: center;
+        .card {
+            border: none;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            margin: 20px auto;
+            max-width: 600px;
+            min-width: 450px;
         }
 
-        .bordo img {
+        .card img {
             width: 100%;
             height: auto;
             max-width: 200px;
@@ -87,6 +88,19 @@ if (!isset($_SESSION["utente"]))
             background: rgba(0, 0, 0, 0.5);
             z-index: 1000;
         }
+
+        img {
+            display: block;
+            margin: 20px auto;
+            max-width: 200px;
+            max-height: 200px;
+        }
+
+        h1,
+        h3,
+        p {
+            text-align: center;
+        }
     </style>
 </head>
 
@@ -104,15 +118,18 @@ if (!isset($_SESSION["utente"]))
             $row = $result->fetch_assoc();
             $e = $row["email"];
             echo "<h1>$e</h1>";
+            echo "<div class=\"text-center\">
+                <a href=\"index.php\" class=\"btn btn-primary mt-3\">Torna alla Home</a>
+            </div>";
         } else {
             $sql = "SELECT nome, cognome FROM utente WHERE id = " . $_SESSION["utente"] . "";
             $result = $conn->query($sql);
             $row = $result->fetch_assoc();
             echo "<h1>Benvenuto/a " . $row["nome"] . " " . $row["cognome"] . "</h1>";
+            echo "<a href=\"index.php\" class=\"btn btn-primary mt-3\">Torna alla Home</a>";
+            echo "<br>";
         }
         ?>
-        <a href="index.php" class="btn btn-primary mt-3">Torna alla Home</a>
-        <br>
         <?php
         if ($ut == $_SESSION["utente"]) {
             echo "<a href=\"./creaAnnuncio.php\" class=\"btn btn-secondary mt-2\">Crea un nuovo Annuncio</a>
@@ -157,7 +174,7 @@ if (!isset($_SESSION["utente"]))
                 <input type="hidden" name="id" value="<?php echo $ut; ?>">
             </form>
         </div>
-        <div class="mt-4">
+        <div class="card-body">
             <!-- dashboard articoli -->
             <?php
             $sql = "SELECT annuncio.ID, annuncio.nome, annuncio.foto, tipologia.nome AS tip FROM annuncio
@@ -190,8 +207,8 @@ if (!isset($_SESSION["utente"]))
                         $foto = $row['foto'];
                         $tipologia = $row['tip'];
                         $ID = $row['ID'];
-                        echo "<div class=\"bordo\">
-                                <a href=\"./articolo.php?idArt=$ID&ut=$ut\"><img src=\"$foto\" onerror=\"this.src='../images/default.png'\"></a>
+                        echo "<div class=\"card centered-content\">
+                                <a href=\"./articolo.php?idArt=$ID&ut=$ut\"><img class=\"\" src=\"$foto\" onerror=\"this.src='../images/default.png'\"></a>
                                 <h3>$nome</h3>
                                 <p>$tipologia</p>
                                 <button class=\"btn btn-danger buttons-container\"><a href=\"./eliminaAnnuncio.php?idArt=$ID&ut=$ut\">Elimina</a></button>

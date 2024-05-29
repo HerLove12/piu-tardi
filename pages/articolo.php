@@ -154,7 +154,6 @@ if (!isset($_SESSION["utente"]))
                         echo "<h3 class='text-center'>Articolo già venduto, <a href=\"./index.php\">Cerca qualcos'altro</a></h3>";
                     else {
                         echo "<button id=\"proposta\" class='btn btn-primary'>Fai una Proposta</button>";
-                        echo "<script>var id = '" . $id . "';</script>";
                     }
                 }
             }
@@ -181,6 +180,7 @@ if (!isset($_SESSION["utente"]))
 
         // Get the ID from the PHP variable
         const id = '<?php echo $id; ?>';
+        const ut = '<?php echo $utID;?>';
 
         // Create the form elements
         const form = document.createElement("form");
@@ -201,6 +201,12 @@ if (!isset($_SESSION["utente"]))
         hiddenInput.name = "id";
         hiddenInput.value = id;
         form.appendChild(hiddenInput);
+
+        const hiddenInput2 = document.createElement("input");
+        hiddenInput2.type = "hidden";
+        hiddenInput2.name = "ut";
+        hiddenInput2.value = ut;
+        form.appendChild(hiddenInput2);
 
         const buttons = document.createElement("div");
         form.appendChild(buttons);
