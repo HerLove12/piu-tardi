@@ -79,15 +79,10 @@ session_start();
   const toggleButton = document.getElementById('togglePassword');
 
   toggleButton.addEventListener('click', () => {
-    if (passwordInput.type === 'password') {
+    if (passwordInput.type === 'password')
       passwordInput.type = 'text';
-      toggleButton.classList.remove('btn-default');
-      toggleButton.classList.add('btn-warning');
-    } else {
+    else 
       passwordInput.type = 'password';
-      toggleButton.classList.remove('btn-warning');
-      toggleButton.classList.add('btn-default');
-    }
   });
 
   const sub = document.getElementById("invia");
