@@ -27,6 +27,8 @@ E' stata poi creata una bozza di grafica CSS per le nuove pagine.
 
 E' stata poi sviluppata la parte front-end con il framework CSS `Bootstrap` per tutte le pagine accompagnata da una necessaria revisione del codice.
 
+---
+
 ### 3. Hosting
 
 Il gruppo ha caricato una versione semi-definitiva del sito sul servizio di hosting `altervista` tramite `FileZilla` ed e' stato creato il databse.
