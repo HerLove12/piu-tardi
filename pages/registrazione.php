@@ -8,7 +8,8 @@ session_start();
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Sito</title>
+  <title>Negozio</title>
+  <link rel="icon" type="image/png" href="../images/icon.png">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
   <style>
     body,
@@ -116,9 +117,14 @@ session_start();
     errorText.style.marginBottom = '10px';
     errorText.textContent = 'Le due password non coincidono';
     errorText.id = 'errore';
-    passwordConfirmInput.textContent = "";
+    passwordInput.value = "";
+    passwordConfirmInput.value = "";
     const button = document.getElementById("invia");
     button.disabled = true;
+
+    email.addEventListener('input', () => {
+      checkPasswords();
+    })
 
     passwordInput.addEventListener('input', () => {
       checkPasswords();
@@ -130,16 +136,19 @@ session_start();
 
     function checkPasswords() {
       if (passwordInput.value !== passwordConfirmInput.value) {
-        if (passwordConfirmInput.value != '')
+        if (passwordConfirmInput.value !== '')
           button.disabled = false;
         passwordConfirmInput.style.border = '1px solid red';
         passwordConfirmInput.parentNode.appendChild(errorText);
         button.disabled = true;
       } else {
-        passwordConfirmInput.style.border = '1px solid lightgrey';
-        if (document.getElementById("errore"))
-          passwordConfirmInput.parentNode.removeChild(errorText);
-        button.disabled = false;
+        if (email.value !== "" && email.value.includes("@") && email.value.includes(".") && passwordInput.value != '' && passwordConfirmInput.value != '') {
+          button.disabled = false;
+          passwordConfirmInput.style.border = '1px solid lightgrey';
+          if (document.getElementById("errore"))
+            passwordConfirmInput.parentNode.removeChild(errorText);
+        } else
+          button.disabled = true;
       }
     }
   </script>

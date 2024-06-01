@@ -1,6 +1,6 @@
 <?php
 session_start();
-include ("./connessione.php");
+include("./connessione.php");
 if (!isset($_SESSION["utente"]))
     header("Location: ../index.php");
 ?>
@@ -11,9 +11,9 @@ if (!isset($_SESSION["utente"]))
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>negozio</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <title>Negozio</title>
+    <link rel="icon" type="image/png" href="../images/icon.png">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="../css/styles.css">
     <style>
         .foto_profilo {
@@ -180,7 +180,7 @@ if (!isset($_SESSION["utente"]))
 
         // Get the ID from the PHP variable
         const id = '<?php echo $id; ?>';
-        const ut = '<?php echo $utID;?>';
+        const ut = '<?php echo $utID; ?>';
 
         // Create the form elements
         const form = document.createElement("form");

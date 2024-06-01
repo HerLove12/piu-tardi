@@ -1,6 +1,6 @@
 <?php
 session_start();
-include ("./connessione.php");
+include("./connessione.php");
 if (!isset($_SESSION["utente"]))
     header("Location: ../index.php");
 ?>
@@ -11,9 +11,9 @@ if (!isset($_SESSION["utente"]))
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>negozio</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <title>Negozio</title>
+    <link rel="icon" type="image/png" href="../images/icon.png">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="../css/styles.css">
     <style>
         .foto_profilo {
@@ -75,16 +75,14 @@ if (!isset($_SESSION["utente"]))
                         echo "<a href=\"./utente.php?id=" . $_SESSION["utente"] . "\"><img class=\"foto_profilo img-thumbnail mx-auto d-block\" src=\"$f\" onerror=\"this.src='../images/default.png'\"></a>";
                         ?>
                         <a href="./index.php" class="d-block mt-3 text-center">Torna alla Home</a>
-                        <form action="./creaAnnuncioScript.php" method="post" enctype="multipart/form-data"
-                            class="mt-4">
+                        <form action="./creaAnnuncioScript.php" method="post" enctype="multipart/form-data" class="mt-4">
                             <div class="form-group">
                                 <label for="nome">Nome Articolo</label>
                                 <input type="text" name="nome" class="form-control" required>
                             </div>
                             <div class="form-group">
                                 <label for="descrizione">Descrizione Oggetto</label>
-                                <textarea name="descrizione" class="form-control" cols="50" rows="5" maxlength="250"
-                                    placeholder="Max. 250 Caratteri"></textarea>
+                                <textarea name="descrizione" class="form-control" cols="50" rows="5" maxlength="250" placeholder="Max. 250 Caratteri"></textarea>
                             </div>
                             <div class="form-group">
                                 <label for="file">Foto dell'Articolo</label>

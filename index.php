@@ -8,7 +8,8 @@ session_start();
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Sito</title>
+  <title>Negozio</title>
+  <link rel="icon" type="image/png" href="../images/icon.png">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
   <style>
     body,
@@ -79,27 +80,31 @@ session_start();
   const toggleButton = document.getElementById('togglePassword');
 
   toggleButton.addEventListener('click', () => {
-    if (passwordInput.type === 'password')
+    if (passwordInput.type === 'password') {
       passwordInput.type = 'text';
-    else 
+      toggleButton.classList.remove('btn-default');
+      toggleButton.classList.add('btn-warning');
+    } else {
       passwordInput.type = 'password';
+      toggleButton.classList.remove('btn-warning');
+      toggleButton.classList.add('btn-default');
+    }
   });
 
   const sub = document.getElementById("invia");
   const email = document.getElementById("email");
-  const pass = document.getElementById("password");
   sub.disabled = true;
 
-  email.addEventListener('input', () => {
+  email.addEventListener('change', () => {
     checkPasswords();
   });
 
-  pass.addEventListener('input', () => {
+  passwordInput.addEventListener('change', () => {
     checkPasswords();
   });
 
   function checkPasswords() {
-    if (email.value != "" && pass.value != "" && email.value.includes("@") && email.value.includes(".")) {
+    if (email.value != "" && passwordInput.value != "" && email.value.includes("@") && email.value.includes(".")) {
       sub.disabled = false;
     } else {
       sub.disabled = true;
