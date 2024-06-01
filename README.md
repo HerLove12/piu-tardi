@@ -27,6 +27,7 @@ Infine è stata implementata la funzione di proporre un'offerta per qualsiasi ar
 È stata poi creata una bozza di grafica CSS per le nuove pagine.
 
 È stata poi sviluppata la parte front-end con il framework CSS `Bootstrap` per tutte le pagine accompagnata da una necessaria revisione del codice.
+
 ---
 
 ### 3. Hosting
