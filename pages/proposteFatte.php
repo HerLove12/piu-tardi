@@ -82,14 +82,6 @@ if (!isset($_SESSION["utente"]))
             overflow: hidden;
         }
 
-        .bordo h3,
-        .bordo p {
-            margin: 10px;
-            /* Add some margin to the text inside the card */
-            word-wrap: break-word;
-            /* Wrap long words */
-        }
-
         h1,
         h3,
         p {
@@ -159,7 +151,7 @@ if (!isset($_SESSION["utente"]))
                                 $data = explode("-", $row["dataproposta"]);
                                 $newData = $data[2] . "/" . $data[1] . "/" . $data[0];
 
-                                echo "<a href=\"./articolo.php?idArt=$ID\"><img src=\"$foto\" onerror=\"this.src='../images/default.png'\" width=\"200px\" height=\"200px\" \"></a>
+                                echo "<a href=\"./articolo.php?idArt=$ID&ut=$utID\"><img src=\"$foto\" onerror=\"this.src='../images/default.png'\" width=\"200px\" height=\"200px\" \"></a>
                                         <h3>$nome</h3>
                                         <p>$tipologia</p>
                                         <p>Inviata a:<br><a href=\"./utente.php?id=$utID\">$e<a></p>
@@ -168,8 +160,8 @@ if (!isset($_SESSION["utente"]))
                                     </div>";
                             }
                         } else
-                            echo "<div class='col bordo bg-light d-flex justify-content-center align-items-center m-3 text-center' style='height: 150px'>
-                                <h1>NON SONO PRESENTI ARTICOLI</h1>
+                            echo "<div class='col bordo d-flex justify-content-center align-items-center m-3 text-center' style='height: 200px'>
+                                <h1>NON SONO STATE EFFETTUATE PROPOSTE</h1>
                             </div>";
                         ?>
                     </div>

@@ -52,6 +52,16 @@ if (!isset($_SESSION["utente"]))
             min-width: 300px;
         }
 
+        .bordo {
+            border: 1px solid black;
+            border-radius: 5px;
+            padding: 10px;
+            margin-bottom: 20px;
+            height: 400px;
+            /* Adjust the height as needed */
+            overflow: hidden;
+        }
+
         h1,
         h3,
         p {
@@ -121,7 +131,7 @@ if (!isset($_SESSION["utente"]))
                                 JOIN annuncio ON annuncio.ID = proposta.ID_annuncio
                                 JOIN utente ON annuncio.ID_utente = utente.ID
                                 WHERE utente.ID = {$_SESSION["utente"]}
-                                ORDER BY stato";
+                                ORDER BY stato, dataproposta";
                         $result = $conn->query($sql);
                         if ($result->num_rows > 0) {
                             while ($row = $result->fetch_assoc()) {
@@ -176,8 +186,8 @@ if (!isset($_SESSION["utente"]))
                                 echo "</div>";
                             }
                         } else
-                            echo "<div class='col card bg-light d-flex justify-content-center align-items-center' style='height: 150px'>
-                                    <h1>NON SONO PRESENTI ARTICOLI</h1>
+                            echo "<div class='col bordo d-flex justify-content-center align-items-center m-3 text-center' style='height: 200px'>
+                                    <h1 class=\"m-3\">NESSUNA PROPOSTA RICEVUTA</h1>
                                 </div>";
                         ?>
                     </div>

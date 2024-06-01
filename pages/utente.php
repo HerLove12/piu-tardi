@@ -101,6 +101,16 @@ if (!isset($_SESSION["utente"]))
         p {
             text-align: center;
         }
+
+        .bordo {
+            border: 1px solid black;
+            border-radius: 5px;
+            padding: 10px;
+            margin-bottom: 20px;
+            height: 400px;
+            /* Adjust the height as needed */
+            overflow: hidden;
+        }
     </style>
 </head>
 
@@ -112,7 +122,7 @@ if (!isset($_SESSION["utente"]))
             $sql = "SELECT foto FROM utente WHERE utente.ID = $ut";
             $result = $conn->query($sql);
             $f = $result->fetch_assoc()["foto"];
-            echo "<img class=\"foto_profilo\" src=\"$f\" onerror=\"this.src='../images/default.png'\">";
+            echo "<img class=\"foto_profilo img-thumbnail\" src=\"$f\" onerror=\"this.src='../images/default.png'\">";
             $sql = "SELECT * FROM utente WHERE ID = $ut";
             $result = $conn->query($sql);
             $row = $result->fetch_assoc();
@@ -208,14 +218,16 @@ if (!isset($_SESSION["utente"]))
                         $tipologia = $row['tip'];
                         $ID = $row['ID'];
                         echo "<div class=\"card centered-content\">
-                                <a href=\"./articolo.php?idArt=$ID&ut=$ut\"><img class=\"\" src=\"$foto\" onerror=\"this.src='../images/default.png'\"></a>
+                                <a href=\"./articolo.php?idArt=$ID&ut=$ut\"><img src=\"$foto\" onerror=\"this.src='../images/default.png'\"></a>
                                 <h3>$nome</h3>
                                 <p>$tipologia</p>
                                 <button class=\"btn btn-danger buttons-container\"><a href=\"./eliminaAnnuncio.php?idArt=$ID&ut=$ut\">Elimina</a></button>
                             </div>";
                     }
                 } else {
-                    echo "<p style=\"color:red\">NESSUN ANNUNCIO PRESENTE</p>";
+                    echo "<div class='col bordo d-flex justify-content-center align-items-center m-3 text-center' style='height: 150px'>
+                            <h1>NESSUN ANNUNCIO PRESENTE</h1>
+                        </div>";
                 }
             } else {
                 echo "<h1>Errore nella query</h1>";

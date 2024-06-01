@@ -124,7 +124,7 @@ if (!isset($_SESSION["utente"]))
             $sql = "SELECT foto FROM utente WHERE utente.ID = $ut";
             $result = $conn->query($sql);
             $f = $result->fetch_assoc()["foto"];
-            echo "<a href=\"./utente.php?id=" . $ut . "\"><img class=\"foto_profilo\" src=\"$f\" onerror=\"this.src='../images/default.png'\"></a>";
+            echo "<a href=\"./utente.php?id=" . $ut . "\"><img class=\"foto_profilo img-thumbnail\" src=\"$f\" onerror=\"this.src='../images/default.png'\"></a>";
             $art = $_GET["idArt"];
             $sql = "SELECT a.id, a.nome AS nome, a.descrizione AS descr, a.foto AS foto, a.datacaricamento AS data, t.nome AS tipo, u.email AS email, u.ID as utID FROM annuncio AS a
                 JOIN tipologia AS t ON t.ID = a.ID_tipologia
@@ -144,7 +144,8 @@ if (!isset($_SESSION["utente"]))
 
                 echo "<h1>$n</h1>";
                 echo "<img src=\"$f\" onerror=\"this.src='../images/default.png'\" width=\"200px\" height=\"200px\"><br>";
-                echo "<h3>$d</h3>";
+                if ($d != null)
+                    echo "<h3>$d</h3>";
                 echo "<p>Caricata da:<br><a href=\"./utente.php?id=$utID\">$e<a></p>"; //LINK DIRETTO ALL'UTENTE
                 echo "<p>$t - $newData</p>";
                 if ($utID != $_SESSION["utente"]) {

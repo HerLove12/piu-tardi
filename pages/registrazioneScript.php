@@ -2,11 +2,11 @@
 session_start();
 include("./connessione.php");
 
-$et = $_POST["eta"];
+$e = $_POST["email"];
 $pass = hash("sha256", $_POST["password"]);
 $n = $_POST["nome"];
 $c = $_POST["cognome"];
-$e = $_POST["email"];
+$et = $_POST["eta"];
 $cl = $_POST["classe"];
 $sql = "SELECT * FROM utente WHERE email = '$e'";
 
@@ -20,13 +20,13 @@ if (is_bool($result)) {
     $conn->query($sql);
     if ($conn->affected_rows > 0) {
       $_SESSION["utente"] = $us;
-      header("Location: ./index.php");
+      header("Location: ./pages/index.php");
     } else {
       $_SESSION["errore"] = "ERRORE - QUERY SQL";
       header("Location: ./registrazione.php");
     }
   } else {
-    $_SESSION["errore"] = "EMAIL GIÀ ESISTENTE";
+    $_SESSION["errore"] = "UTENTE GIÀ ESISTENTE";
     header("Location: ./registrazione.php");
   }
 }

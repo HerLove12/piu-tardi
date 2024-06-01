@@ -76,20 +76,20 @@ if (!isset($_SESSION["utente"]))
                         ?>
                         <a href="./index.php" class="d-block mt-3 text-center">Torna alla Home</a>
                         <form action="./creaAnnuncioScript.php" method="post" enctype="multipart/form-data" class="mt-4">
-                            <div class="form-group">
-                                <label for="nome">Nome Articolo</label>
+                            <div class="p-2">
+                                <label class="pb-1" for="nome">Nome Articolo</label>
                                 <input type="text" name="nome" class="form-control" required>
                             </div>
-                            <div class="form-group">
-                                <label for="descrizione">Descrizione Oggetto</label>
-                                <textarea name="descrizione" class="form-control" cols="50" rows="5" maxlength="250" placeholder="Max. 250 Caratteri"></textarea>
+                            <div class="p-2">
+                                <label class="pb-1" for="descrizione">Descrizione Oggetto</label>
+                                <textarea name="descrizione" style="resize: none;" class="form-control" cols="50" rows="5" m maxlength="250" placeholder="Max. 250 Caratteri"></textarea>
                             </div>
-                            <div class="form-group">
-                                <label for="file">Foto dell'Articolo</label>
+                            <div class="p-2">
+                                <label class="pb-1" for="file">Foto dell'Articolo</label><br>
                                 <input type="file" name="file" class="form-control-file" required>
                             </div>
-                            <div class="form-group">
-                                <label for="tipologia">Tipologia dell'Articolo</label>
+                            <div class="p-2">
+                                <label class="pb-1" for="tipologia">Tipologia dell'Articolo</label>
                                 <select name="tipologia" class="form-control" required>
                                     <option value="0" hidden></option>
                                     <?php

@@ -100,7 +100,7 @@ if (!isset($_SESSION["utente"]))
                         ?>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="logout.php">Logout</a>
+                        <a class="nav-item btn btn-danger" href="logout.php">Logout</a>
                     </li>
                 </ul>
             </div>
