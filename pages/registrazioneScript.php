@@ -20,7 +20,7 @@ if (is_bool($result)) {
     $conn->query($sql);
     if ($conn->affected_rows > 0) {
       $_SESSION["utente"] = $us;
-      header("Location: ./pages/index.php");
+      header("Location: ../index.php");
     } else {
       $_SESSION["errore"] = "ERRORE - QUERY SQL";
       header("Location: ./registrazione.php");
