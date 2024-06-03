@@ -251,7 +251,7 @@ if (!isset($_SESSION["utente"]))
 
         // Create the form elements
         const form = document.createElement("form");
-        form.action = "./CambiaFotoProfilo.php";
+        form.action = "./cambiaFotoProfilo.php";
         form.method = "post";
         form.enctype = "multipart/form-data";
         formDiv.appendChild(form);
